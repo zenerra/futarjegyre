@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="server.js"></script>
+    <title>Futárok adatai</title>
+</head>
+<body>
+    <h1>Futárok</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th >#</th>
+                <th id="nameCell">Név</th>
+            </tr>
+        </thead>
+        <tbody id="recordsBody">
+       
+            
+           
+        </tbody>
+
+
+    </table>
+
+    <div class="deleteupdateDiv">
+      
+        <input id="name" type="text" placeholder="Név">
+        <br>
+        <input type="number" id="id" placeholder="Elem kiválasztása ID-vel">
+       <br>
+        <button type="button" id="delete" class="button" onclick="futarTorles()">Delete</button> 
+        <button type="button" id="update" class="button" onclick="futarUpdate()">Update</button> 
+        
+    </div>
+
+    <form>
+        <p>Futár hozzáadása</p>
+        <div>
+            
+            <div >
+                <input id="formName" type="text" placeholder="Név">
+            </div>
+            
+            
+            <button type="submit" class="button" id="submit" value="Submit">Add</button>
+        </div>
+    </form>
+
+
+    <script>
+       
+        const id = 1; 
+        fetch(`http://localhost:3000/futar/:id}`)
+          .then(response => response.text()) 
+          .then(htmlContent => {
+            document.getElementById('recordsBody').innerHTML = htmlContent;
+          })
+          .catch(error => {
+            console.error('Error', error);
+          });
+
+
+
+
+         
+     
+          async function futarTorles() {
+    const id = document.getElementById('id').value;
+    try {
+        const response = await fetch(`http://localhost:3000/futar/${id}`, {
+            method: 'DELETE',
+        });
+        const data = await response.json();
+        
+        if (response.ok) {
+            document.getElementById('id').value = "";
+            document.getElementById('name').value = "";
+        }
+    } catch (error) {
+        alert('Error futar torlesnel');
+        console.error(error);
+    }
+}
+document.querySelector('form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById("formName").value;    
+
+    if(name.length!=0){
+        try {
+        const response = await fetch('http://localhost:3000/futar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({fnev: name})
+        });
+        const data = await response.json();
+        document.getElementById('formName').value = "";
+        console.log("sikeres kuldes!");
+        
+    } catch (error) {
+        alert('Error futar hozzaadasanal');
+        console.error(error);
+    }
+}
+else{
+    console.log("Ures megadott ertek!")
+}
+    });
+async function futarUpdate() {
+    const id = document.getElementById('id').value;
+    const name = document.getElementById('name').value;
+    try {
+        const response = await fetch(`http://localhost:3000/futar/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ fnev: name})
+        });
+        const data = await response.json();
+        if(response.ok){
+            console.log("sikeres frissites!")
+            document.getElementById('id').value = "";
+            document.getElementById('name').value = "";
+        }
+       
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+    
+
+        
+    </script>
+      
+</body>
+</html>

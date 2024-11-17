@@ -1,0 +1,81 @@
+body{
+    background-color: rgb(9, 9, 19);
+    color: whitesmoke;
+    margin: 5rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table{
+    margin-bottom: 1rem;
+    
+}
+
+td, th {
+    border: 1px solid red;
+    text-align: left;
+    padding: 6px;
+    
+      
+}
+
+
+
+input{
+    height: 3rem;
+    padding-left: 10px;
+    
+}
+
+button{
+    width: 7rem;
+    height: 3rem;
+    font-weight: bold;
+    color: rgb(9, 9, 19);
+    border: 2px solid rgb(255, 0, 0);
+    border-radius: 5px;
+    margin: 0.3rem;
+}
+
+button:hover{
+    height: 2.7rem;
+    background-color: red;
+    color: whitesmoke;
+}
+
+
+
+form{
+   
+
+    height: 11.5rem;
+}
+
+form
+{
+    background-color: rgb(0, 0, 0);
+    border-radius: 10%;
+    border: 2px red solid;
+    width: 15rem;
+    padding: 1rem;
+    width: 11.5rem;
+    margin-top: 2rem;
+}
+
+.deleteupdateDiv > input{
+    width: 14.5rem;
+}
+
+#submit{
+    margin: 0;
+    margin-top: 10px;
+    width: 100%;
+}
+
+#recordsBody{
+  
+    margin: 100px   ;
+}
+
+#nameCell{
+    width: 12.5rem;
+}
